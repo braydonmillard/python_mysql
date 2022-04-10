@@ -24,15 +24,25 @@ def get_log(id):
         print(row)
 
 def update_log(id, text):
-    sql = ("(%s, %s)")
-    cursor.execute(sql, (text, user,))
+    sql = ("UPDATE logs SET text = %s WHERE id = %s")
+    cursor.execute(sql, (text, id))
     db.commit()
-    log_id = cursor.lastrowid
-    print("Added log {}".format(log_id))
+    print("Log updated")
+
+def delete_log(id):
+    sql = ("DELETE FROM logs WHERE id = %s")
+    cursor.execute(sql, (id,))
+    db.commit()
+    print("Log removed")
 
 #add_log('This is log one', 'Brad')
 #add_log('This is log two', 'Jeff')
 #add_log('This is log three', 'Jane')
 
 #get_logs()
-get_log(2)
+#get_log(2)
+
+#update_log(2, 'Updated log')
+
+#delete_log(2)
+get_logs()
